@@ -1,1 +1,1 @@
-__class__.__name__
+MIN_IN_H: ClassVar[int] = 60
