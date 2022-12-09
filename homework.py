@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import ClassVar
+from typing import ClassVar, Dict, List, Type
 
 
 class UnsupportedTypeTraining(Exception):
@@ -120,12 +120,12 @@ class Swimming(Training):
                 * self.duration)
 
 
-def read_package(workout_type: str, data: list[int]) -> Training:
+def read_package(workout_type: str, data: List[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
-    training_types: dict[str, Training] = {'SWM': Swimming,
-                                           'RUN': Running,
-                                           'WLK': SportsWalking,
-                                           }
+    training_types: Dict[str, Type[Training]] = {'SWM': Swimming,
+                                                 'RUN': Running,
+                                                 'WLK': SportsWalking,
+                                                 }
     if workout_type not in training_types.keys():
         raise NotImplementedError("Не определен тип тренировки")
     return training_types[workout_type](*data)
